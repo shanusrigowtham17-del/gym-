@@ -19,6 +19,9 @@ window.addEventListener('scroll', () => {
 // =============================================
 // 1. BACKGROUND PARTICLE FIELD (Three.js)
 // =============================================
+ // =============================================
+// 1. BACKGROUND DUMBBELL FIELD (Three.js)
+// =============================================
 (function initBgCanvas() {
   const canvas = document.getElementById('bg-canvas');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -27,35 +30,153 @@ window.addEventListener('scroll', () => {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 30;
+  camera.position.z = 40;
 
-  // Particles
-  const count = 2000;
-  const positions = new Float32Array(count * 3);
-  const sizes = new Float32Array(count);
+  // Lights
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+  scene.add(ambientLight);
+  const pointLight = new THREE.PointLight(0xff4d00, 3, 60);
+  pointLight.position.set(10, 10, 10);
+  scene.add(pointLight);
+  const pointLight2 = new THREE.PointLight(0xff7300, 2, 40);
+  pointLight2.position.set(-10, -10, 5);
+  scene.add(pointLight2);
 
-  for (let i = 0; i < count; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 120;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 120;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 80;
-    sizes[i] = Math.random() * 2;
+  // Build one dumbbell group
+  function createDumbbell() {
+    const group = new THREE.Group();
+
+    const metalMat = new THREE.MeshStandardMaterial({
+      color: 0x222222,
+      metalness: 0.95,
+      roughness: 0.1,
+    });
+    const plateMat = new THREE.MeshStandardMaterial({
+      color: 0xff4d00,
+      metalness: 0.8,
+      roughness: 0.2,
+      emissive: 0xff2200,
+      emissiveIntensity: 0.2,
+    });
+
+    // Bar
+    const barGeo = new THREE.CylinderGeometry(0.08, 0.08, 3.2, 12);
+    const bar = new THREE.Mesh(barGeo, metalMat);
+    bar.rotation.z = Math.PI / 2;
+    group.add(bar);
+
+    // Plates — left side
+    [-1.2, -0.85].forEach(x => {
+      const plateGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.2, 16);
+      const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.rotation.z = Math.PI / 2;
+      plate.position.x = x;
+      group.add(plate);
+    });
+
+    // Plates — right side
+    [1.2, 0.85].forEach(x => {
+      const plateGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.2, 16);
+      const plate = new THREE.Mesh(plateGeo, plateMat);
+      plate.rotation.z = Math.PI / 2;
+      plate.position.x = x;
+      group.add(plate);
+    });
+
+    // End caps
+    [-1.45, 1.45].forEach(x => {
+      const capGeo = new THREE.CylinderGeometry(0.13, 0.13, 0.15, 10);
+      const cap = new THREE.Mesh(capGeo, metalMat);
+      cap.rotation.z = Math.PI / 2;
+      cap.position.x = x;
+      group.add(cap);
+    });
+
+    return group;
   }
 
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+  // Scatter many dumbbells
+  const dumbbells = [];
+  const count = 18;
 
-  const mat = new THREE.PointsMaterial({
-    color: 0xff4d00,
-    size: 0.15,
-    transparent: true,
-    opacity: 0.5,
-    sizeAttenuation: true,
+  for (let i = 0; i < count; i++) {
+    const db = createDumbbell();
+
+    db.position.set(
+      (Math.random() - 0.5) * 90,
+      (Math.random() - 0.5) * 70,
+      (Math.random() - 0.5) * 40
+    );
+
+    db.rotation.set(
+      Math.random() * Math.PI,
+      Math.random() * Math.PI,
+      Math.random() * Math.PI
+    );
+
+    // Random scale so they feel varied
+    const s = 0.4 + Math.random() * 1.0;
+    db.scale.setScalar(s);
+
+    // Store random spin speeds
+    db.userData = {
+      rx: (Math.random() - 0.5) * 0.008,
+      ry: (Math.random() - 0.5) * 0.012,
+      rz: (Math.random() - 0.5) * 0.006,
+      floatSpeed: 0.3 + Math.random() * 0.5,
+      floatAmp: 0.5 + Math.random() * 1.0,
+      floatOffset: Math.random() * Math.PI * 2,
+      baseY: db.position.y,
+    };
+
+    scene.add(db);
+    dumbbells.push(db);
+  }
+
+  // Subtle orange fog
+  scene.fog = new THREE.FogExp2(0x080808, 0.018);
+
+  // Mouse parallax
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
   });
 
-  const particles = new THREE.Points(geo, mat);
-  scene.add(particles);
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    dumbbells.forEach(db => {
+      db.rotation.x += db.userData.rx;
+      db.rotation.y += db.userData.ry;
+      db.rotation.z += db.userData.rz;
+
+      // Gentle floating
+      db.position.y = db.userData.baseY +
+        Math.sin(t * db.userData.floatSpeed + db.userData.floatOffset) * db.userData.floatAmp;
+    });
+
+    // Camera parallax
+    camera.position.x += (mouseX * 5 - camera.position.x) * 0.03;
+    camera.position.y += (-mouseY * 3 - camera.position.y) * 0.03;
+    camera.lookAt(scene.position);
+
+    // Animate lights
+    pointLight.position.x = Math.sin(t * 0.5) * 15;
+    pointLight.position.y = Math.cos(t * 0.3) * 10;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
   // Grid
   const gridHelper = new THREE.GridHelper(200, 40, 0xff4d00, 0x1a1a1a);
   gridHelper.position.y = -20;

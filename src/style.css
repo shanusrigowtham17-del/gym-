@@ -30,20 +30,7 @@ body {
   cursor: none;
 }
 
-/* CUSTOM CURSOR */
-body::after {
-  content: '';
-  position: fixed;
-  width: 12px; height: 12px;
-  background: var(--orange);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: transform 0.1s;
-  top: var(--my, 50%);
-  left: var(--mx, 50%);
-}
+
 
 /* ===== BG CANVAS ===== */
 #bg-canvas {

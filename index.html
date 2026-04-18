@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRONFORGE — Elite Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- CANVAS BG -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">IRON<span>FORGE</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#trainers">Trainers</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a href="#join" class="nav-cta">JOIN NOW</a>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">EST. 2024 · MUMBAI</div>
+      <h1 class="hero-title">
+        <span class="line">FORGE</span>
+        <span class="line accent">YOUR</span>
+        <span class="line">LEGACY</span>
+      </h1>
+      <p class="hero-sub">Where iron meets intention. Elite training for those who refuse ordinary.</p>
+      <div class="hero-buttons">
+        <a href="#join" class="btn-primary">START TODAY</a>
+        <a href="#programs" class="btn-ghost">EXPLORE PROGRAMS</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" data-count="2400">0</span><span class="stat-label">MEMBERS</span></div>
+      <div class="stat"><span class="stat-num" data-count="18">0</span><span class="stat-label">TRAINERS</span></div>
+      <div class="stat"><span class="stat-num" data-count="6">0</span><span class="stat-label">LOCATIONS</span></div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>STRENGTH</span><span class="dot">✦</span>
+      <span>ENDURANCE</span><span class="dot">✦</span>
+      <span>POWER</span><span class="dot">✦</span>
+      <span>DISCIPLINE</span><span class="dot">✦</span>
+      <span>ELITE TRAINING</span><span class="dot">✦</span>
+      <span>STRENGTH</span><span class="dot">✦</span>
+      <span>ENDURANCE</span><span class="dot">✦</span>
+      <span>POWER</span><span class="dot">✦</span>
+      <span>DISCIPLINE</span><span class="dot">✦</span>
+      <span>ELITE TRAINING</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- 3D SCENE SECTION -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">WHO WE ARE</div>
+        <h2>NOT JUST A GYM.<br><em>A FORGE.</em></h2>
+        <p>IRONFORGE was built for athletes, warriors, and anyone ready to transform. State-of-the-art equipment, elite coaching methodology, and an environment that pushes every rep further.</p>
+        <ul class="about-features">
+          <li><span class="check">→</span> 24/7 Access — Train on your schedule</li>
+          <li><span class="check">→</span> AI-Powered Programming</li>
+          <li><span class="check">→</span> Recovery & Cryotherapy Suite</li>
+          <li><span class="check">→</span> Nutrition Lab on-site</li>
+        </ul>
+      </div>
+      <div class="about-visual">
+        <canvas id="cube-canvas"></canvas>
+        <div class="about-badge">ELITE<br>CERTIFIED</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section id="programs">
+    <div class="section-header">
+      <div class="section-label">WHAT WE OFFER</div>
+      <h2>PROGRAMS BUILT<br>FOR <em>RESULTS</em></h2>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card" data-index="0">
+        <div class="program-icon">⚡</div>
+        <h3>POWER LIFTING</h3>
+        <p>Max strength methodology. Periodized programming for raw power gains.</p>
+        <div class="program-tag">STRENGTH</div>
+      </div>
+      <div class="program-card featured" data-index="1">
+        <div class="program-icon">🔥</div>
+        <h3>HIIT FORGE</h3>
+        <p>High-intensity metabolic conditioning. Burn fat, build conditioning, dominate.</p>
+        <div class="program-tag">MOST POPULAR</div>
+      </div>
+      <div class="program-card" data-index="2">
+        <div class="program-icon">🏋️</div>
+        <h3>OLYMPIC LIFTING</h3>
+        <p>Snatch, clean & jerk. Technical mastery under expert coaching.</p>
+        <div class="program-tag">TECHNICAL</div>
+      </div>
+      <div class="program-card" data-index="3">
+        <div class="program-icon">🥊</div>
+        <h3>COMBAT CONDITIONING</h3>
+        <p>Functional fitness meets fight training. Endurance and explosiveness.</p>
+        <div class="program-tag">HYBRID</div>
+      </div>
+      <div class="program-card" data-index="4">
+        <div class="program-icon">🧬</div>
+        <h3>BODY RECOMPOSITION</h3>
+        <p>Science-backed protocols for simultaneous muscle gain and fat loss.</p>
+        <div class="program-tag">TRANSFORMATION</div>
+      </div>
+      <div class="program-card" data-index="5">
+        <div class="program-icon">🎯</div>
+        <h3>1-ON-1 COACHING</h3>
+        <p>Fully personalized. Your goals, your timeline, elite attention.</p>
+        <div class="program-tag">PREMIUM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINERS -->
+  <section id="trainers">
+    <div class="section-header">
+      <div class="section-label">THE TEAM</div>
+      <h2>ELITE COACHES.<br><em>REAL RESULTS.</em></h2>
+    </div>
+    <div class="trainers-grid">
+      <div class="trainer-card">
+        <div class="trainer-avatar" style="background: linear-gradient(135deg, #ff4d00, #ff9500)">
+          <span>AK</span>
+        </div>
+        <h3>ARJUN KAPOOR</h3>
+        <p class="trainer-role">Head Strength Coach</p>
+        <p class="trainer-bio">National powerlifting champion. 12 years coaching elite athletes.</p>
+        <div class="trainer-spec">STRENGTH · POWERLIFTING</div>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-avatar" style="background: linear-gradient(135deg, #00b4d8, #0077b6)">
+          <span>PS</span>
+        </div>
+        <h3>PRIYA SHARMA</h3>
+        <p class="trainer-role">Performance Director</p>
+        <p class="trainer-bio">CSCS certified. Former Olympic athlete. Specializes in peak performance.</p>
+        <div class="trainer-spec">OLYMPIC LIFTING · HIIT</div>
+      </div>
+      <div class="trainer-card">
+        <div class="trainer-avatar" style="background: linear-gradient(135deg, #7b2d8b, #c77dff)">
+          <span>RV</span>
+        </div>
+        <h3>RAHUL VERMA</h3>
+        <p class="trainer-role">Combat & Conditioning</p>
+        <p class="trainer-bio">MMA fighter turned coach. Explosive conditioning specialist.</p>
+        <div class="trainer-spec">COMBAT · CONDITIONING</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-header">
+      <div class="section-label">MEMBERSHIP</div>
+      <h2>INVEST IN<br><em>YOURSELF</em></h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">STARTER</div>
+        <div class="price-amount"><span>₹</span>2,499<span>/mo</span></div>
+        <ul>
+          <li>✓ Gym Access (6AM–10PM)</li>
+          <li>✓ Group Classes (4/week)</li>
+          <li>✓ Locker Access</li>
+          <li>✗ Personal Training</li>
+          <li>✗ Recovery Suite</li>
+        </ul>
+        <a href="#join" class="btn-price">GET STARTED</a>
+      </div>
+      <div class="price-card elite">
+        <div class="price-badge">BEST VALUE</div>
+        <div class="price-tier">ELITE</div>
+        <div class="price-amount"><span>₹</span>5,999<span>/mo</span></div>
+        <ul>
+          <li>✓ 24/7 Unlimited Access</li>
+          <li>✓ All Group Classes</li>
+          <li>✓ 4 PT Sessions/month</li>
+          <li>✓ Recovery Suite Access</li>
+          <li>✓ Nutrition Consultation</li>
+        </ul>
+        <a href="#join" class="btn-price-elite">JOIN ELITE</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">APEX</div>
+        <div class="price-amount"><span>₹</span>12,999<span>/mo</span></div>
+        <ul>
+          <li>✓ Everything in Elite</li>
+          <li>✓ Daily PT Sessions</li>
+          <li>✓ Custom Programming</li>
+          <li>✓ VIP Recovery Suite</li>
+          <li>✓ Body Composition Analysis</li>
+        </ul>
+        <a href="#join" class="btn-price">GO APEX</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN CTA -->
+  <section id="join">
+    <canvas id="particles-canvas"></canvas>
+    <div class="join-content">
+      <div class="section-label">LIMITED SPOTS</div>
+      <h2>READY TO<br><em>FORGE YOUR</em><br>LEGACY?</h2>
+      <p>First month FREE for new members. No contracts. Pure commitment.</p>
+      <form class="join-form" id="joinForm">
+        <input type="text" placeholder="YOUR NAME" required />
+        <input type="email" placeholder="YOUR EMAIL" required />
+        <input type="tel" placeholder="PHONE NUMBER" />
+        <select>
+          <option value="">SELECT PROGRAM</option>
+          <option>Power Lifting</option>
+          <option>HIIT Forge</option>
+          <option>Olympic Lifting</option>
+          <option>Combat Conditioning</option>
+          <option>Body Recomposition</option>
+          <option>1-on-1 Coaching</option>
+        </select>
+        <button type="submit" class="btn-submit">FORGE MY PATH</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo">IRON<span>FORGE</span></div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>TRAIN</h4>
+          <a href="#">Programs</a>
+          <a href="#">Schedule</a>
+          <a href="#">Trainers</a>
+        </div>
+        <div class="footer-col">
+          <h4>CLUB</h4>
+          <a href="#">Membership</a>
+          <a href="#">About Us</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>CONNECT</h4>
+          <a href="#">Instagram</a>
+          <a href="#">YouTube</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 IRONFORGE. ALL RIGHTS RESERVED.</p>
+      <p>MUMBAI, INDIA</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
